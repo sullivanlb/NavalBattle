@@ -13,20 +13,40 @@ void testConstructeur() {
     cout << b3 << endl;
 
     // Cas d'erreurs
-    CBateau bErr1("", p1, 5);
+    try {
+        CBateau bErr1("", p1, 5);
+    }catch (invalid_argument& ia) {
+        cout << ia.what() << endl;
+    }
 
-    p1.first = -1;
-    CBateau bErr2("Naval", p1, 6);
+    try {
+        p1.first = -1;
+        CBateau bErr2("Naval", p1, 6);
+    }catch (invalid_argument& ia) {
+        cout << ia.what() << endl;
+    }
 
+    try {
+        p1.first = 12;
+        p1.second = -20;
+        CBateau bErr3("Naval", p1, 6);
+    }catch (invalid_argument& ia) {
+        cout << ia.what() << endl;
+    }
+
+    try {
+        p1.second = 0;
+        CBateau bErr4("Naval", p1, -5);
+    }catch (invalid_argument& ia) {
+        cout << ia.what() << endl;
+    }
+
+    // Cas limites
+    
 }
 
 int main() {
-    try {
-        testConstructeur();
-    } catch (invalid_argument& ia) {
-        cout << ia.what() << endl;
-        
-    }
+    testConstructeur();
 
     return 0;
 }
