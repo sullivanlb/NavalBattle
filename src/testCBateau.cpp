@@ -42,7 +42,10 @@ void testConstructeur() {
     }
 
     // Cas limites
-    
+    p1.first = 0;
+    p1.second = 0;
+    CBateau b5("V", p1, 1);
+    cout << endl << b5 << endl;
 }
 
 int main() {

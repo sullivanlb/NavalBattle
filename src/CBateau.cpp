@@ -157,14 +157,14 @@ bool CBateau::tirAdverse(pair<int, int> p) {
 ostream& operator<<(ostream& os, CBateau& theB) {
     os << "Nom : " << theB.m_nom << endl;
     os << "Taille : " << theB.m_taille << endl;
-    os << "Point d'ancrage : (" << theB.m_position.first ;
-    os << ", " << theB.m_position.second << ")" << endl;
+    os << "Point d'ancrage : x = " << theB.m_position.first ;
+    os << " | y = " << theB.m_position.second << endl;
 
     os << "Touché ? : ";
     for (int i = 0; i < theB.m_taille; i++){
         os << " | " << theB.m_pDegats[i];
     }
-    os << endl;
+    os << " | " << endl;
 
     return os;
 }
