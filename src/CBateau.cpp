@@ -116,9 +116,10 @@ void CBateau::setPosition(int i, int j){
 bool CBateau::estCoule(){ 
     int i = 0;
     while(i < m_taille){
-        if (m_pDegats[i] == false){
+        if (!m_pDegats[i]){
             return false;
         }
+        i++;
     }
 
     return true;
@@ -142,7 +143,10 @@ bool CBateau::tirAdverse(pair<int, int> p) {
                 }
                 tmp++;
             }
-            m_pDegats[index] = true;
+            if (!m_pDegats[index]) {
+                m_pDegats[index] = true;
+                return true;
+            }
         }
     }
     return false;
@@ -167,4 +171,17 @@ ostream& operator<<(ostream& os, CBateau& theB) {
     os << " | " << endl;
 
     return os;
+}
+
+void CBateau::operator=(const CBateau& theBToCopy) {
+    if (this != &theBToCopy) {
+        this->m_nom = theBToCopy.m_nom;
+        this->m_taille = theBToCopy.m_taille;
+        this->m_position = theBToCopy.m_position;
+        this->m_pDegats = new bool[m_taille];
+
+        for (int i = 0; i < this->m_taille; i++) {
+            this->m_pDegats[i] = theBToCopy.m_pDegats[i];
+        }
+    }
 }

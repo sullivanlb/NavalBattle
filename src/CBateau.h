@@ -23,8 +23,10 @@ class CBateau {
         void setPosition(int i, int j);
         bool estCoule();
         bool tirAdverse(pair<int, int> p);
+        void operator=(const CBateau& theBtoCopy);
 
         friend ostream& operator<<(ostream& os, CBateau& theB);
+        
         
 };
 
