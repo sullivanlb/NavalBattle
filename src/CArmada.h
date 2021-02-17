@@ -17,6 +17,7 @@ class CArmada {
         int getEffectif();
         void getArmadaFromFile();
         bool placerAleatoirement();
+        
 };
 
 #endif

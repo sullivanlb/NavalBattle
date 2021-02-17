@@ -39,3 +39,34 @@ int CArmada::getNbreTotCases() {
     }
     return total;
 }
+
+/**
+ * @brief  Renvoie le nombre de bateaux qui ne sont pas encore coulés
+ * @return int - le nombre de bateau qui ne sont pas encore coulés
+ */
+int CArmada::getEffectif() {
+    int compteur = 0;
+    for (int i = 0; i < sizeof(m_listeBateaux); i++) {
+        if (m_listeBateaux[i].estCoule()) compteur++;
+    }
+    return compteur;
+}
+
+/**
+ * @brief  Lecture du fichier flotille.txt qui contient la liste complète de tous les bateaux
+ */
+void CArmada::getArmadaFromFile() {
+    const char* file = "flotille.txt";
+    ifstream fluxIn (file, ios::in);
+    string line;
+
+    // lecture du fichier ligne par ligne
+    while (!fluxIn.eof()) {
+        getline( fluxIn, line, '\n');
+        if (line.front() != '#') {
+            // split line en mot
+        }
+    }
+    
+    fluxIn.close();
+}
