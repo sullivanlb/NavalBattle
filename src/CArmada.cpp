@@ -90,8 +90,13 @@ void CArmada::getArmadaFromFile() {
 }
 
 bool CArmada::placerAleatoirement() {
+    srand (time(NULL));
 
+    for (int i = 0; i < sizeof(m_listeBateaux); i++) {
+        int k = rand() % ((TAILLE_GRILLE-2) + 1);
+
+        
+    }
     
-
     return false;
 }
