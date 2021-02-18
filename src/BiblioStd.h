@@ -20,6 +20,7 @@
 #include <errno.h>
 #include <fcntl.h>
 #include <stdexcept>
+#include <iterator>
 
 /*** CONSTANTES ***/
 // Taille de la grille

@@ -64,9 +64,34 @@ void CArmada::getArmadaFromFile() {
     while (!fluxIn.eof()) {
         getline( fluxIn, line, '\n');
         if (line.front() != '#') {
-            // split line en mot
+            std::istringstream buf(line);
+            std::istream_iterator<string> beg(buf), end;
+            std::vector<std::string> tokens(beg, end);
+
+            string nomBateau = tokens.at(0);
+
+            istringstream iss(tokens.at(1));
+            int ligne;
+            iss >> ligne;
+
+            istringstream iss(tokens.at(2));
+            int taille;
+            iss >> taille;
+
+            pair<int, int> position (ligne, 0);
+
+            CBateau* bateau = new CBateau(nomBateau, position, taille);
+
+            m_listeBateaux.push_back(*bateau);
         }
     }
     
     fluxIn.close();
+}
+
+bool CArmada::placerAleatoirement() {
+
+    
+
+    return false;
 }

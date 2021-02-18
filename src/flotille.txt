@@ -2,5 +2,8 @@
 # format de 1 ligne :
 # nomDuBateau<ESPACE>nombreSurGrille<ESPACE>nombreCasesHorizontales
 # exemples :
-torpilleur 2 2
-porte-avion 1 4
+porte-avion 1 5
+cuirasse 1 4
+sous-marin 2 3
+fregate 2 3
+torpilleur 1 2
