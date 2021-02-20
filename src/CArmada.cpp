@@ -78,7 +78,7 @@ void CArmada::getArmadaFromFile() {
             int taille;
             iss >> taille;
 
-            pair<int, int> position (ligne, 0);
+            pair<int, int> position (ligne, -1);
 
             CBateau* bateau = new CBateau(nomBateau, position, taille);
 
@@ -93,8 +93,50 @@ bool CArmada::placerAleatoirement() {
     srand (time(NULL));
 
     for (int i = 0; i < sizeof(m_listeBateaux); i++) {
-        int k = rand() % ((TAILLE_GRILLE-2) + 1);
+        int randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
 
+        for (int j = 0; j < MAX_ESSAIS; j++) {
+            bool test = false;
+
+            for (int k = 0; k < sizeof(m_listeBateaux); k++) {
+
+                //si le bateau est a la meme ligne de celui que l'on veut placer
+                if (m_listeBateaux[i].getPosition().first == m_listeBateaux[k].getPosition().first) {
+                    
+                    // si le numero aleatoire n'est pas sur un bateau
+                    if (randNumber < m_listeBateaux[k].getPosition().second || randNumber >= (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille())) {
+                        
+                        // si le bateau a placer ne touche pas la partie gauche d'un autre bateau
+                        if (randNumber + m_listeBateaux[i].getTaille() < m_listeBateaux[k].getPosition().second) {
+
+                            // si le bateau a placer ne touche pas la partie droite d'un autre bateau
+                            if (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille() < randNumber) {
+                                
+                            }else{
+                                test = false;
+                            }
+                        }else{
+                            test = false;
+                        }
+                    }else{
+                        test = false;
+                    }
+                }else{
+                    test = false;
+                }
+
+                if (test) {
+                    k = sizeof(m_listeBateaux);
+                }
+            }
+
+            if (test) {
+                j = MAX_ESSAIS;
+            }else {
+                randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
+            }
+
+        }
         
     }
     

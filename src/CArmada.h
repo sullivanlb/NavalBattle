@@ -4,7 +4,7 @@
 #include "BiblioStd.h"
 #include "CBateau.h"
 
-#define MAX_ESSAIS 20
+#define MAX_ESSAIS 30
 
 class CArmada {
 
