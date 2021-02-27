@@ -39,7 +39,18 @@ compilTestCBateau :
 	@echo Compilation testCBateau
 	$(GPP) $(SRC)/testCBateau.cpp $(BIN)/CBateau.o -o $(BIN)/testCBateau.bin
 
-# A VOUS D'ECRIRE LA SUITE...
+# La cible "testCArmada"
+testCArmada : deleteAll compilCBateau compilCArmada compilTestCArmada
+
+# La cible "compilCArmada"
+compilCArmada :
+	@echo Compilation CArmada
+	$(GPP) $(SRC)/CArmada.cpp -o $(BIN)/CArmada.o -c
+
+# La cible "compilTestCArmada"
+compilTestCArmada :
+	@echo Compilation testCArmada
+	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CArmada.o -o $(BIN)/testCArmada.bin
 
 # ICI, la cible de compilation finale pour obtenir main.bin
 # A executer A LA FIN du projet en s'assurant que toutes les classes du projet compilent et s'exécutent sans erreurs !

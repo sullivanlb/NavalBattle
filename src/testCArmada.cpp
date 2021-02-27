@@ -3,7 +3,7 @@
 void testAjoutBateau() {
     CArmada armada;
 
-    pair<int, int> p1 = (0, 5);
+    pair<int, int> p1 (0, 5);
     CBateau b1("Bateau 1", p1, 2);
 
     p1.first = 1;
