@@ -91,12 +91,13 @@ void CArmada::getArmadaFromFile() {
 
 bool CArmada::placerAleatoirement() {
     srand (time(NULL));
+    bool test = false;
 
     for (int i = 0; i < sizeof(m_listeBateaux); i++) {
         int randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
 
         for (int j = 0; j < MAX_ESSAIS; j++) {
-            bool test = false;
+            test = false;
 
             for (int k = 0; k < sizeof(m_listeBateaux); k++) {
 
@@ -111,7 +112,8 @@ bool CArmada::placerAleatoirement() {
 
                             // si le bateau a placer ne touche pas la partie droite d'un autre bateau
                             if (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille() < randNumber) {
-                                
+                                m_listeBateaux[i].setPosition(m_listeBateaux[i].getPosition().first, randNumber);
+                                test = true;
                             }else{
                                 test = false;
                             }
@@ -135,10 +137,8 @@ bool CArmada::placerAleatoirement() {
             }else {
                 randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
             }
-
         }
-        
     }
     
-    return false;
+    return test;
 }
