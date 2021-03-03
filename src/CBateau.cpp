@@ -39,7 +39,7 @@ CBateau::CBateau(string nom, pair<int, int> point, int taille){
  * @pre le bateau en paramètre ne doit pas être NULL
  * @param theB - le bateau à copier
  */
-CBateau::CBateau(CBateau& theBToCopy) {
+CBateau::CBateau(const CBateau& theBToCopy) {
     m_nom = theBToCopy.m_nom;
     m_taille = theBToCopy.m_taille;
     m_position = theBToCopy.m_position;

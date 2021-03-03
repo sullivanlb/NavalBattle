@@ -14,10 +14,11 @@ void CArmada::ajouterBateau(CBateau& unBat) {
  * @param i - l'index du tableau où se situe le bateau 
  * @return CBateau* - l'adresse du bateau à l'index i
  */
-CBateau* CArmada::getBateau(int i) {
+CBateau* CArmada::getBateau(unsigned int i) {
     if (0 <= i && i < sizeof(m_listeBateaux)) {
         return &m_listeBateaux[i];
     }
+    return NULL;
 }
 
 /**
@@ -25,7 +26,7 @@ CBateau* CArmada::getBateau(int i) {
  * @return int - le nombre de bateaux
  */
 int CArmada::getEffectifTotal() {
-    return sizeof(m_listeBateaux);
+    return m_listeBateaux.size();
 }
 
 /**
@@ -34,7 +35,7 @@ int CArmada::getEffectifTotal() {
  */
 int CArmada::getNbreTotCases() {
     int total =  0;
-    for (int i = 0; i < sizeof(m_listeBateaux); i++) {
+    for (unsigned int i = 0; i < m_listeBateaux.size(); i++) {
         total += m_listeBateaux[i].getTaille();
     }
     return total;
@@ -46,8 +47,8 @@ int CArmada::getNbreTotCases() {
  */
 int CArmada::getEffectif() {
     int compteur = 0;
-    for (int i = 0; i < sizeof(m_listeBateaux); i++) {
-        if (m_listeBateaux[i].estCoule()) compteur++;
+    for (unsigned int i = 0; i < m_listeBateaux.size(); i++) {
+        if (!m_listeBateaux[i].estCoule()) compteur++;
     }
     return compteur;
 }
@@ -56,50 +57,46 @@ int CArmada::getEffectif() {
  * @brief  Lecture du fichier flotille.txt qui contient la liste complète de tous les bateaux
  */
 void CArmada::getArmadaFromFile() {
-    const char* file = "flotille.txt";
-    ifstream fluxIn (file, ios::in);
+    const char* nomFichier = "flotille.txt";
+    ifstream infile (nomFichier, ios::in);
     string line;
 
     // lecture du fichier ligne par ligne
-    while (!fluxIn.eof()) {
-        getline( fluxIn, line, '\n');
+    cout << "before line" << endl;
+    while (getline(infile, line, '\n')) {
+        cout << "line" << endl;
         if (line.front() != '#') {
-            std::istringstream buf(line);
-            std::istream_iterator<string> beg(buf), end;
-            std::vector<std::string> tokens(beg, end);
+            istringstream iss(line);
 
-            string nomBateau = tokens.at(0);
+            string nomBateau;
+            iss >> nomBateau;
 
-            istringstream iss(tokens.at(1));
-            int ligne;
-            iss >> ligne;
+            cout << line << endl;
+            cout << "hello : " << nomBateau << endl;
 
-            istringstream iss(tokens.at(2));
-            int taille;
-            iss >> taille;
+            exit(1);
 
-            pair<int, int> position (ligne, -1);
+           // pair<int, int> position (ligne, -1);
 
-            CBateau* bateau = new CBateau(nomBateau, position, taille);
-
-            m_listeBateaux.push_back(*bateau);
+            //CBateau bateau(nomBateau, position, taille);
+            //this->ajouterBateau(bateau);
         }
     }
     
-    fluxIn.close();
+    infile.close();
 }
 
 bool CArmada::placerAleatoirement() {
     srand (time(NULL));
     bool test = false;
 
-    for (int i = 0; i < sizeof(m_listeBateaux); i++) {
+    for (unsigned int i = 0; i < sizeof(m_listeBateaux); i++) {
         int randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
 
-        for (int j = 0; j < MAX_ESSAIS; j++) {
+        for (unsigned int j = 0; j < MAX_ESSAIS; j++) {
             test = false;
 
-            for (int k = 0; k < sizeof(m_listeBateaux); k++) {
+            for (unsigned int k = 0; k < sizeof(m_listeBateaux); k++) {
 
                 //si le bateau est a la meme ligne de celui que l'on veut placer
                 if (m_listeBateaux[i].getPosition().first == m_listeBateaux[k].getPosition().first) {

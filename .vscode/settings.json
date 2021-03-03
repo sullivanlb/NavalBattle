@@ -2,6 +2,7 @@
     "files.associations": {
         "*.html": "html",
         "optional": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "iosfwd": "cpp"
     }
 }

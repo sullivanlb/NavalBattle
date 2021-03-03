@@ -13,7 +13,7 @@ class CArmada {
 
     public:
         void ajouterBateau(CBateau& unBat);
-        CBateau* getBateau(int i);
+        CBateau* getBateau(unsigned int i);
         int getEffectifTotal();
         int getNbreTotCases();
         int getEffectif();

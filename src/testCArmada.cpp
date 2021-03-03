@@ -12,10 +12,24 @@ void testAjoutBateau() {
 
     armada.ajouterBateau(b1);
     armada.ajouterBateau(b2);
+
+    cout << *armada.getBateau(0) << endl;
+    cout << *armada.getBateau(1) << endl;
+}
+
+void testGet() {
+    CArmada armada;
+
+    armada.getArmadaFromFile();
+
+    cout << "Effectif Total : " << armada.getEffectifTotal() << endl;
+    cout << "Nombre de cases total : " << armada.getNbreTotCases() << endl;
+    cout << "Effectif : " << armada.getEffectif() << endl;
 }
 
 int main() {
-    testAjoutBateau();
+    //testAjoutBateau();
+    testGet();
 
 
     return 0;

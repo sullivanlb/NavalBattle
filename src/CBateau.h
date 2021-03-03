@@ -14,7 +14,7 @@ class CBateau {
     public:
         CBateau();
         CBateau(string n, pair<int, int> p, int t);
-        CBateau(CBateau& theBToCopy);
+        CBateau(const CBateau& theBToCopy);
         ~CBateau();
         bool getDegats(int i);
         string getNom();

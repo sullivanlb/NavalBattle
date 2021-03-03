@@ -50,7 +50,7 @@ compilCArmada :
 # La cible "compilTestCArmada"
 compilTestCArmada :
 	@echo Compilation testCArmada
-	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CArmada.o -o $(BIN)/testCArmada.bin
+	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CArmada.o $(BIN)/CBateau.o -o $(BIN)/testCArmada.bin
 
 # ICI, la cible de compilation finale pour obtenir main.bin
 # A executer A LA FIN du projet en s'assurant que toutes les classes du projet compilent et s'exécutent sans erreurs !
