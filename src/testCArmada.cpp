@@ -1,6 +1,8 @@
 #include "CArmada.h"
 
 void testAjoutBateau() {
+    cout << "***TEST AJOUT BATEAU***" << endl;
+
     CArmada armada;
 
     pair<int, int> p1 (0, 5);
@@ -17,9 +19,10 @@ void testAjoutBateau() {
     cout << *armada.getBateau(1) << endl;
 }
 
-void testGet() {
-    CArmada armada;
+void testGetAndFile() {
+    cout << endl << "***TEST GET AND GET FROPM FILE***" << endl;
 
+    CArmada armada;
     armada.getArmadaFromFile();
 
     cout << "Effectif Total : " << armada.getEffectifTotal() << endl;
@@ -27,10 +30,23 @@ void testGet() {
     cout << "Effectif : " << armada.getEffectif() << endl;
 }
 
-int main() {
-    //testAjoutBateau();
-    testGet();
+void testAleatoire() {
+    cout << endl << "***TEST ALEATOIRE***" << endl;
 
+    CArmada armada;
+
+    armada.getArmadaFromFile();
+    armada.placerAleatoirement();
+
+    for (int i = 0; i < 5; i++) {
+        cout << *armada.getBateau(i) << endl;
+    }
+}
+
+int main() {
+    testAjoutBateau();
+    testGetAndFile();
+    testAleatoire();
 
     return 0;
 }

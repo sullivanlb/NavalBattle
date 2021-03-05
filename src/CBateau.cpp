@@ -19,7 +19,7 @@ CBateau::CBateau() {
  * @param taille - la taille du bateau 
  */
 CBateau::CBateau(string nom, pair<int, int> point, int taille){
-    if (nom == "" || point.first < 0 || point.second < 0 || taille <= 0) {
+    if (nom == "" || point.first < 0 || taille <= 0) {
         throw invalid_argument("CBateau(): paramètre non valide.");
     }
 

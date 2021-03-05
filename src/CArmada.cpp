@@ -15,7 +15,7 @@ void CArmada::ajouterBateau(CBateau& unBat) {
  * @return CBateau* - l'adresse du bateau à l'index i
  */
 CBateau* CArmada::getBateau(unsigned int i) {
-    if (0 <= i && i < sizeof(m_listeBateaux)) {
+    if (0 <= i && i < m_listeBateaux.size()) {
         return &m_listeBateaux[i];
     }
     return NULL;
@@ -57,79 +57,90 @@ int CArmada::getEffectif() {
  * @brief  Lecture du fichier flotille.txt qui contient la liste complète de tous les bateaux
  */
 void CArmada::getArmadaFromFile() {
-    const char* nomFichier = "flotille.txt";
+    const char* nomFichier = "../data/flotille.txt";
     ifstream infile (nomFichier, ios::in);
     string line;
 
-    // lecture du fichier ligne par ligne
-    cout << "before line" << endl;
-    while (getline(infile, line, '\n')) {
-        cout << "line" << endl;
-        if (line.front() != '#') {
-            istringstream iss(line);
+    if (infile.is_open()) {
 
-            string nomBateau;
-            iss >> nomBateau;
+        // lecture du fichier ligne par ligne
+        while (getline(infile, line, '\n')) {
+            if (line.front() != '#') {
+                istringstream iss(line);
 
-            cout << line << endl;
-            cout << "hello : " << nomBateau << endl;
+                string nomBateau;
+                iss >> nomBateau;
 
-            exit(1);
+                int ligne;
+                iss >> ligne;
+                pair<int, int> position (ligne, -1);
 
-           // pair<int, int> position (ligne, -1);
+                int taille;
+                iss >> taille;
+                CBateau bateau(nomBateau, position, taille);
 
-            //CBateau bateau(nomBateau, position, taille);
-            //this->ajouterBateau(bateau);
+                this->ajouterBateau(bateau);
+            }
         }
-    }
     
-    infile.close();
+        infile.close();
+    } else {
+        cout << "unable to open file" << endl;
+    }
 }
 
 bool CArmada::placerAleatoirement() {
     srand (time(NULL));
     bool test = false;
 
-    for (unsigned int i = 0; i < sizeof(m_listeBateaux); i++) {
+    for (unsigned int i = 0; i < m_listeBateaux.size(); i++) {
         int randNumber = rand() % ((TAILLE_GRILLE-2) + 1);
 
         for (unsigned int j = 0; j < MAX_ESSAIS; j++) {
-            test = false;
+            test = true;
 
-            for (unsigned int k = 0; k < sizeof(m_listeBateaux); k++) {
+            for (unsigned int k = 0; k < m_listeBateaux.size(); k++) {
 
-                //si le bateau est a la meme ligne de celui que l'on veut placer
-                if (m_listeBateaux[i].getPosition().first == m_listeBateaux[k].getPosition().first) {
-                    
-                    // si le numero aleatoire n'est pas sur un bateau
-                    if (randNumber < m_listeBateaux[k].getPosition().second || randNumber >= (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille())) {
-                        
-                        // si le bateau a placer ne touche pas la partie gauche d'un autre bateau
-                        if (randNumber + m_listeBateaux[i].getTaille() < m_listeBateaux[k].getPosition().second) {
+                //si le bateau est différent de lui-même
+                if (i != k) {
 
-                            // si le bateau a placer ne touche pas la partie droite d'un autre bateau
-                            if (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille() < randNumber) {
-                                m_listeBateaux[i].setPosition(m_listeBateaux[i].getPosition().first, randNumber);
-                                test = true;
+                    //si le bateau est déjà placer
+                    if (m_listeBateaux[k].getPosition().second != -1) {
+
+                        //si le bateau est a la meme ligne de celui que l'on veut placer
+                        if (m_listeBateaux[i].getPosition().first == m_listeBateaux[k].getPosition().first) {
+                            
+                            // si le numero aleatoire n'est pas sur un bateau
+                            if (randNumber < m_listeBateaux[k].getPosition().second || randNumber >= (m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille())) {
+                                
+                                // si le bateau a placer ne touche pas la partie droite ou gauche d'un autre bateau
+                                bool isLeftSideTouched = randNumber + m_listeBateaux[i].getTaille() < m_listeBateaux[k].getPosition().second;
+                                bool isRightSideTouched = m_listeBateaux[k].getPosition().second + m_listeBateaux[k].getTaille() < randNumber;
+
+                                if (isLeftSideTouched || isRightSideTouched) {
+                                    test = true;
+                                }else{
+                                    test = false;
+                                }
                             }else{
                                 test = false;
                             }
-                        }else{
-                            test = false;
                         }
-                    }else{
-                        test = false;
                     }
-                }else{
-                    test = false;
                 }
 
                 if (test) {
-                    k = sizeof(m_listeBateaux);
+                    k = m_listeBateaux.size();
                 }
             }
 
+            //si le bateau depasse la grille
+            if (randNumber + m_listeBateaux[i].getTaille() >= TAILLE_GRILLE) {
+                test = false;
+            }
+
             if (test) {
+                m_listeBateaux[i].setPosition(m_listeBateaux[i].getPosition().first, randNumber);
                 j = MAX_ESSAIS;
             }else {
                 randNumber = rand() % ((TAILLE_GRILLE-2) + 1);

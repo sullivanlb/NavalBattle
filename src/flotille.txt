@@ -1,9 +1,0 @@
-# Fichier de configuration de la flotille
-# format de 1 ligne :
-# nomDuBateau<ESPACE>nombreSurGrille<ESPACE>nombreCasesHorizontales
-# exemples :
-porte-avion 1 5
-cuirasse 1 4
-sous-marin 2 3
-fregate 2 3
-torpilleur 1 2
