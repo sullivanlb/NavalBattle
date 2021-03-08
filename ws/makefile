@@ -52,6 +52,24 @@ compilTestCArmada :
 	@echo Compilation testCArmada
 	$(GPP) $(SRC)/testCArmada.cpp $(BIN)/CArmada.o $(BIN)/CBateau.o -o $(BIN)/testCArmada.bin
 
+# La cible "testCGui"
+testCGui : deleteAll compilCBateau compilCArmada compilCCoups compilCGui compilTestCGui
+
+# La cible "compilCGui"
+compilCGui :
+	@echo Compilation CGui
+	$(GPP) $(SRC)/CGui.cpp -o $(BIN)/CGui.o -c
+
+# La cible "compilCCoups"
+compilCCoups :
+	@echo Compilation CCoups
+	$(GPP) $(SRC)/CCoups.cpp -o $(BIN)/CCoups.o -c
+	
+# La cible "compilTestCGui"
+compilTestCGui :
+	@echo Compilation testCGui
+	$(GPP) $(SRC)/testCGui.cpp $(BIN)/CGui.o $(BIN)/CBateau.o $(BIN)/CArmada.o $(BIN)/CCoups.o -o $(BIN)/testCGui.bin
+
 # ICI, la cible de compilation finale pour obtenir main.bin
 # A executer A LA FIN du projet en s'assurant que toutes les classes du projet compilent et s'exécutent sans erreurs !
 # La cible "lanceurFinal"
