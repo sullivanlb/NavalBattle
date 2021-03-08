@@ -41,6 +41,12 @@ void testAleatoire() {
     for (int i = 0; i < 5; i++) {
         cout << *armada.getBateau(i) << endl;
     }
+
+    armada.placerAleatoirement();
+
+    for (int i = 0; i < 5; i++) {
+        cout << *armada.getBateau(i) << endl;
+    }
 }
 
 int main() {

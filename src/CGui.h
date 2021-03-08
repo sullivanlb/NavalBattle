@@ -18,16 +18,17 @@ class CGui : public CBaseJeu {
         CGui();
         CGui(CArmada* pArmada, CCoups* pCoups);
         virtual ~CGui();
+
         void setArmadaCoups(CArmada* pArmada, CCoups* pCoups);
         friend ostream& operator<<(ostream& os, CGui& theG);
 		bool positionnerBateaux() override;
 		pair<int,int> choisirAttaque() override;
 		void afficheGagne() override;
-		void affichePerdu() override;										
+		void affichePerdu() override;
 
 	private:
 		void remplirDeuxGrilles(ostream& os) override;
-		void afficherLaGrille(ostream& os, string jouOuAdv) override;	
+		void afficherLaGrille(ostream& os, string jouOuAdv) override;
 
 };
 
