@@ -33,12 +33,34 @@ void testAffichage() {
     gui.setArmadaCoups(pArmada, pCoups);
 
     cout << gui;
+
+    gui.afficheGagne();
+    gui.affichePerdu();
+}
+
+void testChoisirAttaque() {
+    cout << endl << "***TEST CHOISIR ATTAQUE***" << endl;
+
+    CGui gui;
+    CArmada armada;
+
+    armada.getArmadaFromFile();
+    armada.placerAleatoirement();
+    
+    CArmada* pArmada = &armada;
+    CCoups* pCoups = new CCoups();
+
+    gui.setArmadaCoups(pArmada, pCoups);
+
+    pair<int, int> p = gui.choisirAttaque();
+    cout << "x = " << p.first << " & y = " << p.second << endl;
 }
 
 int main () {
     
     //testPositionnerBateaux();
-    testAffichage();
+    //testAffichage();
+    testChoisirAttaque();
 
     return 0;
 }

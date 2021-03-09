@@ -4,6 +4,7 @@
 # exemples :
 porte-avion 1 5
 cuirasse 3 4
-sous-marin 2 3
+sous-marin 8 3
 fregate 2 3
-torpilleur 1 2
+torpilleur 9 2
+paquebot 7 6

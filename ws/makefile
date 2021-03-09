@@ -70,6 +70,36 @@ compilTestCGui :
 	@echo Compilation testCGui
 	$(GPP) $(SRC)/testCGui.cpp $(BIN)/CGui.o $(BIN)/CBateau.o $(BIN)/CArmada.o $(BIN)/CCoups.o -o $(BIN)/testCGui.bin
 
+# La cible "compilCSocket"
+compilCSocket :
+	@echo Compilation CSocket
+	$(GPP) $(SRC)/CSocket.cpp -o $(BIN)/CSocket.o -c
+
+# La cible "compilCClientSocket"
+compilCClientSocket :
+	@echo Compilation CClientSocket
+	$(GPP) $(SRC)/CClientSocket.cpp -o $(BIN)/CClientSocket.o -c
+
+# La cible "CServerSocket"
+compilCServerSocket : 
+	@echo Compilation CServerSocket
+	$(GPP) $(SRC)/CServerSocket.cpp -o $(BIN)/CServerSocket.o -c
+
+# La cible "CJoueur"
+compilCJoueur : 
+	@echo Compilation CJoueur
+	$(GPP) $(SRC)/CJoueur.cpp -o $(BIN)/CJoueur.o -c
+
+# La cible "CJoueurCli"
+compilCJoueurCli : 
+	@echo Compilation CJoueurCli
+	$(GPP) $(SRC)/CJoueurCli.cpp -o $(BIN)/CJoueurCli.o -c
+
+# La cible "CJoueurServ"
+compilCJoueurServ : 
+	@echo Compilation CJoueurServ
+	$(GPP) $(SRC)/CJoueurServ.cpp -o $(BIN)/CJoueurServ.o -c
+
 # ICI, la cible de compilation finale pour obtenir main.bin
 # A executer A LA FIN du projet en s'assurant que toutes les classes du projet compilent et s'exécutent sans erreurs !
 # La cible "lanceurFinal"

@@ -133,7 +133,8 @@ bool CBateau::estCoule(){
  */
 bool CBateau::tirAdverse(pair<int, int> p) {
     if (!estCoule()) {
-        if (p.first == m_position.first && (p.second >= m_position.second || p.second <= (m_position.second + m_taille))) {
+        cout << p.first << "==" << m_position.first << "&& (" << p.second  << ") >=" << m_position.second << "&&" << p.second << "<= (" << m_position.second + m_taille << ")" << endl;
+        if (p.first == m_position.first && (p.second >= m_position.second && p.second <= (m_position.second + m_taille))) {
             int tmp = 0;
             int index = 0;
             while (tmp < m_taille){

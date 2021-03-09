@@ -45,7 +45,7 @@ pair<int,int> CGui::choisirAttaque() {
     bool test = false;
     int ligne;
     while (!test) {
-        cout << " - Ligne -> x = " << endl;
+        cout << " - Ligne -> x = ";
         cin >> ligne;
 
         if (ligne >= 0 && ligne < TAILLE_GRILLE) {
@@ -58,7 +58,7 @@ pair<int,int> CGui::choisirAttaque() {
     test = false;
     int colonne;
     while (!test) {
-        cout << " - Colonne -> y = " << endl;
+        cout << " - Colonne -> y = ";
         cin >> colonne;
 
         if (colonne >= 0 && colonne < TAILLE_GRILLE) {
@@ -87,7 +87,6 @@ void CGui::remplirDeuxGrilles(ostream& os) {
         }
     }
 
-    cout << m_pArmada->getEffectifTotal() << endl;
     // place les bateaux sur la grille joueur
     for (int i = 0; i < m_pArmada->getEffectifTotal(); i++) {
         CBateau bateau = *m_pArmada->getBateau(i);
@@ -95,13 +94,11 @@ void CGui::remplirDeuxGrilles(ostream& os) {
         int colonne = bateau.getPosition().second;
         int taille = bateau.getTaille();
 
-        cout << taille << " | " << colonne << endl;
-
         for (int j = colonne; j < taille + colonne; j++) {
             m_grilleJou[ligne][j] = 'B';
         }
     }
-    /*
+    
 
     // place les tirs adverses
     for (int i = 0; i < m_pArmada->getEffectifTotal(); i++) {
@@ -145,12 +142,21 @@ void CGui::remplirDeuxGrilles(ostream& os) {
     }
 
     afficherLaGrille(os, "adversaire");
-    */
+    
 }
 
 void CGui::afficherLaGrille(ostream& os, string jouOuAdv) {
+    if (jouOuAdv.compare("joueur") == 0) {
+        os << endl;
+        os << "♦ Ma grille : " << endl;
+    } else {
+        os << endl;
+        os << "♦ La grille adverse : " << endl;
+    }
+
+    os << endl;
     // numérotation en haut de la grille adverse
-    for (int i = 0; i < TAILLE_GRILLE; i++) {
+    for (int i = 0; i < TAILLE_GRILLE-1; i++) {
         os << "\t" << i;
     }
     os << endl;
@@ -162,6 +168,7 @@ void CGui::afficherLaGrille(ostream& os, string jouOuAdv) {
             for (int j = 0; j < TAILLE_GRILLE-1; j++) {
                 os << "\t" << m_grilleJou[i][j];
             }
+            os << endl;
         }
     // si on demande la grille adverse
     } else {
@@ -170,6 +177,8 @@ void CGui::afficherLaGrille(ostream& os, string jouOuAdv) {
             for (int j = 0; j < TAILLE_GRILLE-1; j++) {
                 os << "\t" << m_grilleAdv[i][j];
             }
+            os << endl;
         }
     }
+    
 }

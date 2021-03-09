@@ -15,12 +15,12 @@ class CGui : public CBaseJeu {
         CCoups* m_pCoups;
 
 	public:
-        CGui();
-        CGui(CArmada* pArmada, CCoups* pCoups);
-        virtual ~CGui();
+                CGui();
+                CGui(CArmada* pArmada, CCoups* pCoups);
+                virtual ~CGui();
 
-        void setArmadaCoups(CArmada* pArmada, CCoups* pCoups);
-        friend ostream& operator<<(ostream& os, CGui& theG);
+                void setArmadaCoups(CArmada* pArmada, CCoups* pCoups);
+                friend ostream& operator<<(ostream& os, CGui& theG);
 		bool positionnerBateaux() override;
 		pair<int,int> choisirAttaque() override;
 		void afficheGagne() override;
